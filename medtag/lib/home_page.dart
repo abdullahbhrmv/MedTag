@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medtag/screens/drug_search_page.dart';
 import 'package:medtag/screens/profile_page.dart';
 import 'package:medtag/screens/reminder_page.dart';
+import 'package:medtag/screens/qr_scan_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const DrugSearchPage(),
     const ReminderPage(),
+    // const QRScanPage(), // QR kod tarayıcıyı ekleyin
     const ProfilePage(),
   ];
 
@@ -25,30 +27,55 @@ class _HomePageState extends State<HomePage> {
         index: _currentIndex,
         children: _pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'İlaçlar',
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFFd98555), // Arka plan rengini turuncu yapın
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
-            label: 'Hatırlatıcı',
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'İlaçlar',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.alarm),
+                label: 'Hatırlatıcı',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.qr_code_scanner),
+                label: 'QR Tarayıcı', // QR kod tarayıcı
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profil',
+              ),
+            ],
+            backgroundColor: Colors.transparent,
+            selectedItemColor: Color(0xFFd98555),
+            unselectedItemColor: Colors.grey,
           ),
-        ],
-        backgroundColor: const Color(0xFFAFF2F2),
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
+        ),
       ),
     );
   }

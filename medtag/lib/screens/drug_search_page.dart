@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:medtag/screens/drug_detail_page.dart';
-
 import 'package:csv/csv.dart';
 
 class DrugSearchPage extends StatefulWidget {
@@ -63,9 +62,17 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('İlaç Bilgi Uygulaması'),
-        backgroundColor: const Color(0xFFAFF2F2),
+        title: const Text(
+          'MedTag',
+          style: TextStyle(
+            fontFamily: "Brand-Regular",
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: const Color(0xFF67b8de),
       ),
+      backgroundColor: const Color(0xFFE8F8FF),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -80,6 +87,7 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
                 onChanged: _filterDrugs,
                 decoration: InputDecoration(
                   labelText: 'İlaç adını girin',
+                  labelStyle: const TextStyle(fontFamily: "Brand-Regular"),
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.clear),
@@ -93,7 +101,7 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 15),
             if (_error != null)
               Text(
                 'Hata: $_error',
@@ -106,8 +114,7 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
                       itemBuilder: (context, index) {
                         final drug = _filteredDrugList[index];
                         final drugName = drug['Medicine Name'] ?? 'Bilinmiyor';
-                        return ListTile(
-                          title: Text(drugName),
+                        return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
@@ -117,6 +124,26 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
                               ),
                             );
                           },
+                          child: Card(
+                            color: const Color(0xFFb4dced),
+                            elevation: 2,
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                drugName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Brand-Regular",
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                            ),
+                          ),
                         );
                       },
                     )
