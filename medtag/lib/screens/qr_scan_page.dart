@@ -63,6 +63,7 @@ class _QRScanPageState extends State<QRScanPage> {
           ),
         ],
       ),
+      backgroundColor: const Color(0xFFE8F8FF),
     );
   }
 }

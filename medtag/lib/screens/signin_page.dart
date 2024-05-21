@@ -102,29 +102,57 @@ class SigninPage extends StatelessWidget {
                     TextField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: "Email",
-                        labelStyle: TextStyle(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.email,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: "Email",
+                        hintStyle: const TextStyle(
                           fontSize: 14,
                           fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                       ),
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontFamily: "Brand-Regular",
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: passwordController,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: "Şifre",
-                        labelStyle: TextStyle(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.password,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: "Şifre",
+                        hintStyle: const TextStyle(
                           fontSize: 14,
                           fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                       ),
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFFe8f8ff),
+                        fontFamily: "Brand-Regular",
+                      ),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(

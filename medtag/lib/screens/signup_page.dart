@@ -17,6 +17,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController birthDateController = TextEditingController();
   DateTime? selectedDate;
 
   Future<void> signUp(
@@ -137,7 +138,10 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: 10),
               const Text(
                 "Kayıt Ol",
-                style: TextStyle(fontFamily: "Brand Bold", fontSize: 24),
+                style: TextStyle(
+                  fontFamily: "Brand Bold",
+                  fontSize: 24,
+                ),
                 textAlign: TextAlign.center,
               ),
               Padding(
@@ -147,36 +151,89 @@ class _SignupPageState extends State<SignupPage> {
                     const SizedBox(height: 10),
                     TextField(
                       controller: nameController,
-                      decoration: const InputDecoration(
-                        labelText: "Ad Soyad",
-                        labelStyle: TextStyle(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.person_sharp,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: "Ad Soyad",
+                        labelStyle: const TextStyle(
                           fontSize: 14,
                           fontFamily: "Brand-Regular",
                         ),
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                        hintStyle: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
+                        ),
                       ),
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontFamily: "Brand-Regular",
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: "Email",
-                        labelStyle: TextStyle(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.email,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: "Email",
+                        hintStyle: const TextStyle(
                           fontSize: 14,
                           fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                       ),
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontFamily: "Brand-Regular",
+                      ),
                     ),
                     const SizedBox(height: 10),
-                    ListTile(
-                      leading: const Icon(Icons.calendar_today),
-                      title: Text(selectedDate != null
-                          ? selectedDate!.toString().split(' ')[0]
-                          : 'Doğum Tarihi Seç'),
+                    TextField(
+                      controller: birthDateController,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.calendar_today,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: 'Doğum Tarihi Seç',
+                        hintStyle: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
+                        ),
+                      ),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFFe8f8ff),
+                        fontFamily: "Brand-Regular",
+                      ),
                       onTap: () async {
                         final selected = await DatePicker.showSimpleDatePicker(
                           context,
@@ -189,9 +246,10 @@ class _SignupPageState extends State<SignupPage> {
                         );
 
                         if (selected != null) {
-                          // Kullanıcı bir tarih seçtiğinde, seçilen tarihi güncelle
                           setState(() {
                             selectedDate = selected;
+                            birthDateController.text =
+                                selected.toString().split(' ')[0];
                           });
                         }
                       },
@@ -200,29 +258,57 @@ class _SignupPageState extends State<SignupPage> {
                     TextField(
                       controller: passwordController,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: "Şifre",
-                        labelStyle: TextStyle(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.password,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: "Şifre",
+                        hintStyle: const TextStyle(
                           fontSize: 14,
                           fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                       ),
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFFe8f8ff),
+                        fontFamily: "Brand-Regular",
+                      ),
                     ),
                     const SizedBox(height: 10),
                     TextField(
                       controller: confirmPasswordController,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: "Şifre Onayı",
-                        labelStyle: TextStyle(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF91c9e8),
+                        suffixIcon: const Icon(
+                          Icons.password,
+                          color: Color(0xFFe8f8ff),
+                        ),
+                        hintText: "Şifre Onayı",
+                        hintStyle: const TextStyle(
                           fontSize: 14,
                           fontFamily: "Brand-Regular",
+                          color: Color(0xFFe8f8ff),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
                       ),
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFFe8f8ff),
+                        fontFamily: "Brand-Regular",
+                      ),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(

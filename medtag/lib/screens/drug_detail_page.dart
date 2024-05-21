@@ -125,6 +125,7 @@ class _DrugDetailPageState extends State<DrugDetailPage> {
                   )
                 : const Center(child: CircularProgressIndicator()),
       ),
+      backgroundColor: const Color(0xFFE8F8FF),
     );
   }
 
@@ -142,6 +143,7 @@ class _DrugDetailPageState extends State<DrugDetailPage> {
             Text(
               title,
               style: const TextStyle(
+                fontFamily: "Brand-Regular",
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.blueGrey,
@@ -150,7 +152,7 @@ class _DrugDetailPageState extends State<DrugDetailPage> {
             const SizedBox(height: 8),
             Text(
               content,
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, fontFamily: "Brand-Regular"),
             ),
           ],
         ),
