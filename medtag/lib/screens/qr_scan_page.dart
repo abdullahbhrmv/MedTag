@@ -34,7 +34,15 @@ class _QRScanPageState extends State<QRScanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QR Kod Tarayıcı'),
+        backgroundColor: const Color(0xFF67b8de),
+        title: const Text(
+          'QR Kod Tarayıcı',
+          style: TextStyle(
+            fontFamily: "Brand-Regular",
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Column(
         children: <Widget>[

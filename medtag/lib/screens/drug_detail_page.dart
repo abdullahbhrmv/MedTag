@@ -46,40 +46,114 @@ class _DrugDetailPageState extends State<DrugDetailPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(drugName),
-        backgroundColor: const Color(0xFFAFF2F2),
+        title: Text(
+          drugName,
+          style: const TextStyle(
+            fontFamily: "Brand-Regular",
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: const Color(0xFF67b8de),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
-      body: Padding(
+      body: Container(
+        color: const Color(0xFFE8F8FF),
         padding: const EdgeInsets.all(16.0),
         child: _translatedDrugInfo != null
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (widget.drug['Image URL'] != null)
-                    Image.network(widget.drug['Image URL']),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Kullanım: ${_translatedDrugInfo!['uses'] ?? 'Bilgi Yok'}',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Yan Etkiler: ${_translatedDrugInfo!['side_effects'] ?? 'Bilgi Yok'}',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Üretici: ${widget.drug['Manufacturer'] ?? 'Bilgi Yok'}',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+            ? SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (widget.drug['Image URL'] != null)
+                      Center(
+                        child: Material(
+                          elevation: 3,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Image.network(
+                              widget.drug['Image URL'],
+                              height: 200,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    const SizedBox(height: 16),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: _buildInfoCard(
+                              'Kullanım', _translatedDrugInfo!['uses']),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: _buildInfoCard('Yan Etkiler',
+                              _translatedDrugInfo!['side_effects']),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: _buildInfoCard('Üretici',
+                              widget.drug['Manufacturer'] ?? 'Bilgi Yok'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               )
             : _error != null
-                ? Text(
-                    'Hata: $_error',
-                    style: const TextStyle(color: Colors.red),
+                ? Center(
+                    child: Text(
+                      'Hata: $_error',
+                      style: const TextStyle(color: Colors.red, fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
                   )
                 : const Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+
+  Widget _buildInfoCard(String title, String content) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              content,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }

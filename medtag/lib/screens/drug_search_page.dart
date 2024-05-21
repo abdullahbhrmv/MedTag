@@ -66,91 +66,107 @@ class _DrugSearchPageState extends State<DrugSearchPage> {
           'MedTag',
           style: TextStyle(
             fontFamily: "Brand-Regular",
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             color: Colors.white,
           ),
         ),
         backgroundColor: const Color(0xFF67b8de),
       ),
-      backgroundColor: const Color(0xFFE8F8FF),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: TextField(
-                controller: _controller,
-                onChanged: _filterDrugs,
-                decoration: InputDecoration(
-                  labelText: 'İlaç adını girin',
-                  labelStyle: const TextStyle(fontFamily: "Brand-Regular"),
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      _controller.clear();
-                      FocusScope.of(context).unfocus();
-                      _filterDrugs('');
-                    },
+      body: Stack(
+        children: [
+          Container(
+            color:
+                const Color(0xFFE8F8FF), // Arka plan rengini burada belirleyin
+          ),
+          Column(
+            children: [
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Material(
+                  elevation: 3.0,
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: TextField(
+                      controller: _controller,
+                      onChanged: _filterDrugs,
+                      decoration: InputDecoration(
+                        labelText: 'İlaç adını girin',
+                        labelStyle:
+                            const TextStyle(fontFamily: "Brand-Regular"),
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _controller.clear();
+                            FocusScope.of(context).unfocus();
+                            _filterDrugs('');
+                          },
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
                   ),
-                  border: InputBorder.none,
                 ),
               ),
-            ),
-            const SizedBox(height: 15),
-            if (_error != null)
-              Text(
-                'Hata: $_error',
-                style: const TextStyle(color: Colors.red),
-              ),
-            Expanded(
-              child: _filteredDrugList.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: _filteredDrugList.length,
-                      itemBuilder: (context, index) {
-                        final drug = _filteredDrugList[index];
-                        final drugName = drug['Medicine Name'] ?? 'Bilinmiyor';
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    DrugDetailPage(drug: drug),
+              const SizedBox(height: 15),
+              if (_error != null)
+                Text(
+                  'Hata: $_error',
+                  style: const TextStyle(color: Colors.red),
+                ),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: _filteredDrugList.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: _filteredDrugList.length,
+                          itemBuilder: (context, index) {
+                            final drug = _filteredDrugList[index];
+                            final drugName =
+                                drug['Medicine Name'] ?? 'Bilinmiyor';
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DrugDetailPage(drug: drug),
+                                  ),
+                                );
+                              },
+                              child: Card(
+                                color: const Color(0xFFb4dced),
+                                elevation: 2,
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Text(
+                                    drugName,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Brand-Regular",
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                ),
                               ),
                             );
                           },
-                          child: Card(
-                            color: const Color(0xFFb4dced),
-                            elevation: 2,
-                            margin: const EdgeInsets.symmetric(vertical: 8),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                drugName,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Brand-Regular",
-                                  color: Colors.blueGrey,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                  : const Center(child: Text('İlaç bilgisi bulunamadı.')),
-            ),
-          ],
-        ),
+                        )
+                      : const Center(child: Text('İlaç bilgisi bulunamadı.')),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

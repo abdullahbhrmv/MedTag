@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const DrugSearchPage(),
     const ReminderPage(),
-    // const QRScanPage(), // QR kod tarayıcıyı ekleyin
+    const QRScanPage(), // QR kod tarayıcıyı ekleyin
     const ProfilePage(),
   ];
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFFd98555), // Arka plan rengini turuncu yapın
+          color: Color(0xFFd98555),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
             backgroundColor: Colors.transparent,
-            selectedItemColor: Color(0xFFd98555),
+            selectedItemColor: const Color(0xFF67b8de),
             unselectedItemColor: Colors.grey,
           ),
         ),
