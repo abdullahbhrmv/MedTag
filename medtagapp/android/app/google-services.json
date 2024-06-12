@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "772457775596",
+    "project_id": "medtag-825eb",
+    "storage_bucket": "medtag-825eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772457775596:android:24beb852f6864e066140c9",
+        "android_client_info": {
+          "package_name": "com.example.medtagapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7cNlpSg_n4k197CAkgKaJf5Bov7jQgLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
